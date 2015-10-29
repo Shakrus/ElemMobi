@@ -9,66 +9,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
-using HtmlAgilityPack;
+
 
 namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
         string sURL;
-        CookieContainer cookieContainer;
-        HttpWebRequest glbWebReq;
+        WebReq webReq;
 
         public Form1()
         {
-            InitializeComponent();
-        }
-        
-        private void addCookie(HttpWebRequest   _mywebRequest)
-        {
-            IWebProxy proxy = _mywebRequest.Proxy;
-
-            if (proxy != null)
-            {
-                string proxyuri = proxy.GetProxy(_mywebRequest.RequestUri).ToString();
-                _mywebRequest.UseDefaultCredentials = true;
-                _mywebRequest.Proxy = new WebProxy(proxyuri, false);
-                _mywebRequest.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
-            }
-
-            _mywebRequest.CookieContainer = cookieContainer;
-
-        }
-        
-        private void initCookieContrainer()
-        {
-            cookieContainer = new CookieContainer();            
-        }
-
-        private void GetResponse(HttpWebRequest _webRequest)
-        {
-
-        }
-
-        private void parseAnswer(Stream _stream)
-        {
-            HtmlAgilityPack.HtmlDocument document;            
-            HtmlNode node;
-
-            StreamReader _Answer = new StreamReader(_stream);
-
-            document = new HtmlAgilityPack.HtmlDocument();
-            document.Load(_stream);
+            sURL = "http://elem.mobi/";
             
-            node = document.DocumentNode;
-            Console.WriteLine(node.WriteTo());
-            //Console.WriteLine(_Answer.ReadToEnd());
-        }
+            InitializeComponent();
 
-        private Stream start_get(HttpWebRequest _WebReq, String _str)
+            Login();            
+        }
+        
+        
+        private void start_get(HttpWebRequest _WebReq, String _str)
         {
             //Our getVars, to test the get of our php. 
             //We can get a page without any of these vars too though.
+            /*
             string getVars = _str;
 
             //Initialization, we use localhost, change if applicable
@@ -79,31 +43,34 @@ namespace WindowsFormsApplication2
             //This time, our method is GET.
             addCookie(_WebReq);
             _WebReq.Method = "GET";
+
             //From here on, it's all the same as above.
             HttpWebResponse WebResp = (HttpWebResponse)_WebReq.GetResponse();
             //Let's show some information about the response
-            PutConsole(WebResp);
-            cookieContainer.Add(WebResp.Cookies);
-
+            outputWebRespConsole(WebResp);
+            formConnection.updateCookies(WebResp);
+            
             //Now, we read the response (the string), and output it.
             Stream Answer = WebResp.GetResponseStream();
 
             parseAnswer(Answer);
             WebResp.Close();
             return Answer;
+            */
         }
 
-        private static void PutConsole(HttpWebResponse WebResp)
+        private static void outputWebRespConsole(HttpWebResponse WebResp)
         {
             Console.WriteLine(WebResp.StatusCode);
             Console.WriteLine(WebResp.Server);
         }  
 
-        private Stream start_post(HttpWebRequest _WebReq, string strPage, string strBuffer)
+        private void start_post(string strPage, string strBuffer)
         {
+            /*
             //Our postvars
-            byte[] buffer = Encoding.ASCII.GetBytes(strBuffer);
-       
+            webReq = new WebReq(strPage, getPost.post, strBuffer);
+
             //Our method is post, otherwise the buffer (postvars) would be useless
             _WebReq.Method = "POST";
             //We use form contentType, for the postvars.
@@ -125,41 +92,31 @@ namespace WindowsFormsApplication2
             //Now, we read the response (the string), and output it.
             Stream Answer = WebResp.GetResponseStream();
             parseAnswer(Answer);
-            
-            cookieContainer.Add(WebResp.Cookies);
+                        
+
+            formConnection.updateCookies(WebResp);            
             
             WebResp.Close();
             return Answer;
+             */            
         }
 
-        private Stream Login(HttpWebRequest _webReq)
+        private void Login()
         {
+            
             string postPassword;
             postPassword = "plogin=" + tbLogin.Text + "&ppass=" + tbPass.Text;
 
-            return start_post(_webReq, sURL, postPassword);
-        }
-
-        private void InitWebReq(string strPage)
-        {
-            glbWebReq = (HttpWebRequest)WebRequest.Create(strPage);
-            addCookie(glbWebReq);
+            webReq = new WebReq(sURL, getPost.post, true, postPassword);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Stream Answer;
             
-            sURL = "http://elem.mobi/";
-
-            initCookieContrainer();
-            InitWebReq(sURL);
-
             //start_get(glbWebReq, "");
 
-            Answer  =   Login(glbWebReq);            
                         
-            //Answer = start_get(glbWebReq, "guild/");
+            webReq = new WebReq(sURL+"guild/", getPost.get, false);
 
             //Answer = start_get(glbWebReq, "guild/page_2");
 

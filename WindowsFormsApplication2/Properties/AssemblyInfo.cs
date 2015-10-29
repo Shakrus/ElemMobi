@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WindowsFormsApplication2")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ElemMobiApplication")]
+[assembly: AssemblyDescription("Simple web parser")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WindowsFormsApplication2")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Private")]
+[assembly: AssemblyProduct("ElemMobiApplication")]
+[assembly: AssemblyCopyright("Free To use")]
+[assembly: AssemblyTrademark("No TM")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
