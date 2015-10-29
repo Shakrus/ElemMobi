@@ -29,7 +29,8 @@ public class Connection
 public enum getPost : byte
 {
     get = 0,
-    post = 1
+    post = 1,
+    nothing = 2
 }
 
 public class WebReq
