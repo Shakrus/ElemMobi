@@ -49,7 +49,6 @@
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(100, 20);
             this.tbLogin.TabIndex = 1;
-            this.tbLogin.Text = "contra";
             // 
             // tbPass
             // 
@@ -58,7 +57,6 @@
             this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(100, 20);
             this.tbPass.TabIndex = 2;
-            this.tbPass.Text = "password";
             // 
             // Form1
             // 
