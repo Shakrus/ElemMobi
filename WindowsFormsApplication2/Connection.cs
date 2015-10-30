@@ -3,11 +3,12 @@ using System.Net;
 using System.IO;
 using System.Text;
 using HtmlAgilityPack;
+using System.Text.RegularExpressions;
 
 public class Connection
 {
     private CookieContainer localCookie;
-    private HttpWebRequest glbWebReq;
+    //private HttpWebRequest glbWebReq;
 
     public  CookieContainer cookies
     {
@@ -34,7 +35,7 @@ public enum getPost : byte
 
 public class WebReq
 {
-    Connection formConnection = new Connection();
+    Connection formConnection;   
 
     HttpWebRequest webRequestPOST;
     HttpWebRequest webRequestGET;
@@ -43,19 +44,22 @@ public class WebReq
     getPost currentRequest;
     public Stream Answer;
 
+    PageParser parser;
+
     public string hostSiteName;    
 
-    public WebReq(string _siteName, getPost _opType) : this(_siteName, _opType, true, "")
+    public WebReq(string _siteName, getPost _opType, Connection _connection) : this(_siteName, _opType, _connection, true, "")
     { 
     }
 
-    public WebReq(string _siteName, getPost _opType, bool _silent = true, string _strBuffer = "")
+    public WebReq(string _siteName, getPost _opType, Connection _connection, bool _silent = true, string _strBuffer = "")
     {
         HttpWebRequest localRequest;
         string requestMethod;
 
         hostSiteName = _siteName;
         currentRequest = _opType;
+        formConnection = _connection;
 
         switch (currentRequest)
         {
@@ -91,7 +95,7 @@ public class WebReq
 
         if (!_silent)
         {
-            parseAnswer(Answer);
+            parseAnswer(Answer, _siteName);
         }
         formConnection.updateCookies(webResponse);
         webResponse.Close();
@@ -112,18 +116,37 @@ public class WebReq
         _webRequest.CookieContainer = _connection.cookies;
     }
 
-    private void parseAnswer(Stream _stream)
+    private void parseAnswer(Stream _stream, string _pageName)
     {
         HtmlAgilityPack.HtmlDocument document;
         HtmlNode node;
+        string newFileName;
+             
+        System.Text.Encoding locEncoding = Encoding.Default;
+        
 
+        //StreamReader _Answer = new StreamReader(_stream, locEncoding);
         StreamReader _Answer = new StreamReader(_stream);
 
         document = new HtmlAgilityPack.HtmlDocument();
+        //document.Load(_stream, locEncoding);
         document.Load(_stream);
 
         node = document.DocumentNode;
-        Console.WriteLine(node.WriteTo());        
+
+        //Console.Clear();
+        //Console.OutputEncoding = locEncoding;
+        //Console.WriteLine(node.WriteTo());
+        Console.WriteLine("превед!");
+        
+        parser = new PageParser(node);
+
+        newFileName = Regex.Replace(_pageName, "[\x01-\x1F]", "");
+        newFileName = Regex.Replace(newFileName, @"\/", "_");
+        newFileName = Regex.Replace(newFileName, ":", "_");
+
+        parser.saveToFile(@"C:\temp\"+newFileName+".txt");
+        parser.traverse("top", node);
     }
 
 }

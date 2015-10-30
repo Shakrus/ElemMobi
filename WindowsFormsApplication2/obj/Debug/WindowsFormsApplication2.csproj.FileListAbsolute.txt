@@ -10,3 +10,15 @@
 \\pskov\usersw7$\sukolov\Documents\Visual Studio 2013\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.dll
 \\pskov\usersw7$\sukolov\Documents\Visual Studio 2013\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.pdb
 \\pskov\usersw7$\sukolov\Documents\Visual Studio 2013\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Shark\Documents\GitHub\ElemMobi\WindowsFormsApplication2\bin\Debug\HtmlAgilityPack.xml
