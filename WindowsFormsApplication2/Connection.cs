@@ -8,8 +8,7 @@ using System.Text.RegularExpressions;
 public class Connection
 {
     private CookieContainer localCookie;
-    //private HttpWebRequest glbWebReq;
-
+    
     public  CookieContainer cookies
     {
         get { return localCookie; }        
@@ -41,11 +40,12 @@ public class WebReq
     HttpWebRequest webRequestGET;
 
     HttpWebResponse webResponse;
+
     getPost currentRequest;
     public Stream Answer;
 
     PageParser parser;
-
+    
     public string hostSiteName;    
 
     public WebReq(string _siteName, getPost _opType, Connection _connection) : this(_siteName, _opType, _connection, true, "")
@@ -97,6 +97,10 @@ public class WebReq
         {
             parseAnswer(Answer, _siteName);
         }
+    }
+
+    private void closeResponse()
+    {
         formConnection.updateCookies(webResponse);
         webResponse.Close();
     }
@@ -116,6 +120,11 @@ public class WebReq
         _webRequest.CookieContainer = _connection.cookies;
     }
 
+    public void doParse()
+    {
+        parseAnswer(Answer, hostSiteName);
+    }
+
     private void parseAnswer(Stream _stream, string _pageName)
     {
         HtmlAgilityPack.HtmlDocument document;
@@ -124,29 +133,24 @@ public class WebReq
              
         System.Text.Encoding locEncoding = Encoding.Default;
         
-
-        //StreamReader _Answer = new StreamReader(_stream, locEncoding);
         StreamReader _Answer = new StreamReader(_stream);
 
         document = new HtmlAgilityPack.HtmlDocument();
-        //document.Load(_stream, locEncoding);
+        
         document.Load(_stream);
 
         node = document.DocumentNode;
 
-        //Console.Clear();
-        //Console.OutputEncoding = locEncoding;
-        //Console.WriteLine(node.WriteTo());
-        Console.WriteLine("превед!");
-        
         parser = new PageParser(node);
 
         newFileName = Regex.Replace(_pageName, "[\x01-\x1F]", "");
         newFileName = Regex.Replace(newFileName, @"\/", "_");
         newFileName = Regex.Replace(newFileName, ":", "_");
 
-        parser.saveToFile(@"C:\temp\"+newFileName+".txt");
+        parser.saveToFile(@"D:\temp\"+newFileName+".txt");
         parser.traverse("top", node);
+
+        closeResponse();
     }
 
 }

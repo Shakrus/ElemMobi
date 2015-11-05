@@ -19,6 +19,8 @@ namespace WindowsFormsApplication2
         string sURL;
         Connection connect = new Connection();
         WebReq webReq;
+        private string login;
+        private string pass;
         bool silentLogin;
 
         public Form1()
@@ -36,11 +38,11 @@ namespace WindowsFormsApplication2
 
             if (appSettings["login"] != null)
             {
-                tbLogin.Text = appSettings["login"];
+                login = appSettings["login"];
             }
             if (appSettings["password"] != null)
             {
-                tbPass.Text = appSettings["password"];
+                pass = appSettings["password"];
             }
             if (appSettings["siteName"] != null)
             {
@@ -63,7 +65,7 @@ namespace WindowsFormsApplication2
         {
             
             string postPassword;
-            postPassword = "plogin=" + tbLogin.Text + "&ppass=" + tbPass.Text;
+            postPassword = "plogin=" + login + "&ppass=" + pass;
 
             webReq = new WebReq(sURL, getPost.post, connect, silentLogin, postPassword);
         }
@@ -71,14 +73,9 @@ namespace WindowsFormsApplication2
         private void button1_Click(object sender, EventArgs e)
         {
             
-            //start_get(glbWebReq, "");
-
-                        
-            webReq = new WebReq(sURL+ "guild/94/", getPost.get, connect, false);
-
-            //Answer = start_get(glbWebReq, "guild/page_2");
-
-            //Answer = start_get(glbWebReq, "user/1408977/");
+            webReq = new WebReq(sURL+ tbPageName.Text, getPost.get, connect, false);
+            webReq.doParse();
         }
+
     }
 }
