@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2
 {
-    class CharacterNode : InfoNode
+    public class CharacterNode : InfoNode
     {
-                    
+        public CharacterNode(int _id, string _name) : base(_id, _name)
+        {
+        }
     }
 }

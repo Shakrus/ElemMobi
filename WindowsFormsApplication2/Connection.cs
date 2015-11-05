@@ -92,11 +92,6 @@ public class WebReq
         }
         webResponse = (HttpWebResponse)localRequest.GetResponse();
         Answer = webResponse.GetResponseStream();
-
-        if (!_silent)
-        {
-            parseAnswer(Answer, _siteName);
-        }
     }
 
     private void closeResponse()
@@ -144,8 +139,8 @@ public class WebReq
         parser = new PageParser(node);
 
         newFileName = Regex.Replace(_pageName, "[\x01-\x1F]", "");
-        newFileName = Regex.Replace(newFileName, @"\/", "_");
-        newFileName = Regex.Replace(newFileName, ":", "_");
+        newFileName = Regex.Replace(newFileName, @"\/", "!");
+        newFileName = Regex.Replace(newFileName, ":", ".");
 
         parser.saveToFile(@"D:\temp\"+newFileName+".txt");
         parser.traverse("top", node);
