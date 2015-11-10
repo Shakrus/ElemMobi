@@ -1,8 +1,8 @@
 ﻿using System;
 using HtmlAgilityPack;
-using WindowsFormsApplication2;
+using ElemParser;
 
-namespace WindowsFormsApplication2
+namespace ElemParser
 {
     public class CharacterNode : InfoNode
     {
@@ -29,9 +29,9 @@ namespace WindowsFormsApplication2
             HtmlNodeCollection collection;
             string strValue;
             string attrValue;
-            HtmlNode characterNode;
-            HtmlNodeCollection characterPropertiesCollection;
-            int num;
+            //HtmlNode characterNode;
+            //HtmlNodeCollection characterPropertiesCollection;
+            //int num;
             PageParser parser;
 
             collection = _node.SelectNodes(@"td");
@@ -51,8 +51,7 @@ namespace WindowsFormsApplication2
                             break;
                         case "user":
                             parser = new PageParser(locNode, @"d:\temp\char.txt");
-                            parser.parseNode(this);
-                                                        
+                            parser.parseNode(this, locNode);                                                        
                             break;
                         default:
                             break;

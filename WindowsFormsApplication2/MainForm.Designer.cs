@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication2
+﻿namespace ElemParser
 {
     partial class Form1
     {
@@ -58,7 +58,7 @@
             this.Controls.Add(this.tbPageName);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MainForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

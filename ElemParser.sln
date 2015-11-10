@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication2", "WindowsFormsApplication2\WindowsFormsApplication2.csproj", "{0AD5688C-A60D-42B8-A354-49A5E7A6CB73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElemParser", "WindowsFormsApplication2\ElemParser.csproj", "{0AD5688C-A60D-42B8-A354-49A5E7A6CB73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8811091-FBD6-4654-872E-1382DC3C712A}"
 	ProjectSection(SolutionItems) = preProject

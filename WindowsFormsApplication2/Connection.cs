@@ -127,8 +127,8 @@ public class WebReq
         HtmlNode node;
              
         System.Text.Encoding locEncoding = Encoding.Default;
-        
-        StreamReader _Answer = new StreamReader(_stream);
+
+        StreamReader _Answer = new StreamReader(_stream, System.Text.Encoding.UTF8);//locEncoding);
 
         document = new HtmlAgilityPack.HtmlDocument();
         

@@ -13,7 +13,7 @@ using System.Configuration;
 using System.Text.RegularExpressions;
 
 
-namespace WindowsFormsApplication2
+namespace ElemParser
 {
     public partial class Form1 : Form
     {
