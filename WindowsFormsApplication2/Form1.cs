@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 
 namespace WindowsFormsApplication2
@@ -70,11 +71,30 @@ namespace WindowsFormsApplication2
             webReq = new WebReq(sURL, getPost.post, connect, silentLogin, postPassword);
         }
 
+        string makeURL(string _st)
+        {
+            string ret;
+            ret = Regex.Replace(_st, @"\/", "!");
+            ret = Regex.Replace(ret, ":", ".");
+
+            return ret;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            webReq = new WebReq(sURL+ tbPageName.Text, getPost.get, connect, false);
-            webReq.doParse();
+            CharacterNode node;
+            string fileName;
+            node = new CharacterNode(1, "test");
+            Console.WriteLine(node.Details());
+
+            fileName = makeURL(tbPageName.Text);
+            fileName = string.Format(@"d:\temp\{0}.txt", fileName);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                webReq = new WebReq(string.Format("{0}{1}/page_{2}", sURL, tbPageName.Text, i), getPost.get, connect, false);
+                webReq.doParse(fileName);
+
+            }
         }
 
     }

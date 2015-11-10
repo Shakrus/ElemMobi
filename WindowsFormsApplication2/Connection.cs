@@ -3,7 +3,6 @@ using System.Net;
 using System.IO;
 using System.Text;
 using HtmlAgilityPack;
-using System.Text.RegularExpressions;
 
 public class Connection
 {
@@ -45,6 +44,8 @@ public class WebReq
     public Stream Answer;
 
     PageParser parser;
+
+    private string saveFileName;
     
     public string hostSiteName;    
 
@@ -115,16 +116,15 @@ public class WebReq
         _webRequest.CookieContainer = _connection.cookies;
     }
 
-    public void doParse()
+    public void doParse(string _fileName)
     {
-        parseAnswer(Answer, hostSiteName);
+        parseAnswer(Answer, hostSiteName, _fileName);
     }
 
-    private void parseAnswer(Stream _stream, string _pageName)
+    private void parseAnswer(Stream _stream, string _pageName, string _fileName)
     {
         HtmlAgilityPack.HtmlDocument document;
         HtmlNode node;
-        string newFileName;
              
         System.Text.Encoding locEncoding = Encoding.Default;
         
@@ -138,11 +138,8 @@ public class WebReq
 
         parser = new PageParser(node);
 
-        newFileName = Regex.Replace(_pageName, "[\x01-\x1F]", "");
-        newFileName = Regex.Replace(newFileName, @"\/", "!");
-        newFileName = Regex.Replace(newFileName, ":", ".");
-
-        parser.saveToFile(@"D:\temp\"+newFileName+".txt");
+        parser.FileName = _fileName;
+        //parser.saveToFile(saveFileName);
         parser.traverse("top", node);
 
         closeResponse();
